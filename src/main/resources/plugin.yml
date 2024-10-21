@@ -1,0 +1,6 @@
+name: DrinkGamble
+version: '${project.version}'
+main: me.opd.drinkgamble.DrinkGamble
+api-version: '1.21'
+commands:
+  summongamble:
