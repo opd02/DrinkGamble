@@ -1,6 +1,7 @@
 package me.opd.drinkgamble;
 
 import me.opd.drinkgamble.commands.SummonCommand;
+import me.opd.drinkgamble.listeners.VillagerClickListener;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -19,6 +20,8 @@ public final class DrinkGamble extends JavaPlugin {
         }
 
         this.getCommand("summongamble").setExecutor(new SummonCommand());
+
+        Bukkit.getServer().getPluginManager().registerEvents(new VillagerClickListener(), this);
     }
 
     @Override

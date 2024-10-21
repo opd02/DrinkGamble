@@ -25,9 +25,6 @@ public class SummonCommand implements CommandExecutor {
 
             summonGambler(p);
 
-            GPotion potion = new GPotion(10000,0.5d, new int[]{204, 0, 204});
-            p.getInventory().addItem(potion.getItemStack());
-
             return true;
         }
         return false;
@@ -35,11 +32,11 @@ public class SummonCommand implements CommandExecutor {
 
     public static void summonGambler(Player p){
         Villager v = (Villager) p.getWorld().spawnEntity(p.getLocation(), EntityType.VILLAGER);
-        v.setCustomName("§b§lGambler");
+        v.setCustomName("§2§lGambler");
         v.setCustomNameVisible(true);
         v.setCanPickupItems(false);
         v.setProfession(Villager.Profession.WEAPONSMITH);
-        v.setInvulnerable(true);
+//        v.setInvulnerable(true);
         v.setSilent(true);
         v.setAI(false);
         p.sendMessage(ChatColor.GREEN + "Gambler summoned!");
