@@ -2,6 +2,7 @@ package me.opd.drinkgamble.listeners;
 
 import me.opd.drinkgamble.DrinkGamble;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -28,8 +29,8 @@ public class ItemClickListener implements Listener {
         PersistentDataContainer data = itemMeta.getPersistentDataContainer();
         NamespacedKey nsk = new NamespacedKey(DrinkGamble.instance, "gamblePotion");
         item.setItemMeta(itemMeta);
+        if(!item.getType().equals(Material.POTION)){return;}
 
-        //TODO make sure not stained glass on click
         if(!data.has(nsk, PersistentDataType.STRING)){return;}
 
         String potionData = data.get(nsk, PersistentDataType.STRING);
