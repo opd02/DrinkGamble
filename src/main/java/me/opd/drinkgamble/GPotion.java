@@ -3,17 +3,19 @@ package me.opd.drinkgamble;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionType;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class GPotion {
 
@@ -21,6 +23,13 @@ public class GPotion {
     private double winAmount;
     private double winChance;
     private int[] colorRGB;
+
+    public GPotion(String string){
+        this(Double.parseDouble(string.split(",")[2]),
+                Double.parseDouble(string.split(",")[1]),
+                new int[]{1,1,1},
+                Double.parseDouble(string.split(",")[0]));
+    }
 
     public GPotion(double costAmount, double winChance, int[] colorRGB) {
         this(costAmount, winChance, colorRGB, costAmount * 2);
@@ -54,14 +63,13 @@ public class GPotion {
         lore.add("§r§a"+ df.format(this.winChance * 100) + "% Win Chance");
         lore.add("§c"+ df.format((1 - this.winChance) * 100) + "% Loss Chance");
         lore.add("");
-        lore.add("§r§eWin Amount: $" + NumberFormat.getInstance(Locale.US).format(this.winAmount));
+        lore.add("§r§eWin Amount: §6§l$" + NumberFormat.getInstance(Locale.US).format(this.winAmount));
         lore.add("§f§l(!) Drink this potion for a chance to win");
         itemMeta.setLore(lore);
 
-//        itemMeta.setLore(new ArrayList<>(List.of("§7Gamble potions can be obtained from",
-//                "§7the villager at spawn or in crates.","",
-//                "§r§a58% Win Chance", "§c42% Loss Chance","","§r§8Original Cost: 100,000",
-//                "§f§l(!) Drink this potion to gamble its value")));
+        NamespacedKey nsk = new NamespacedKey(DrinkGamble.instance, "gamblePotion");
+        PersistentDataContainer data = itemMeta.getPersistentDataContainer();
+        data.set(nsk, PersistentDataType.STRING, this.toString());
 
         returnItem.setItemMeta(itemMeta);
         return returnItem;
@@ -81,5 +89,10 @@ public class GPotion {
 
     public int[] getcolorRGB() {
         return colorRGB;
+    }
+
+    @Override
+    public String toString() {
+        return winAmount + "," + winChance + "," + costAmount;
     }
 }

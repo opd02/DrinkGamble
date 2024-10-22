@@ -59,11 +59,11 @@ public class VillagerClickListener implements Listener {
         gui.setItem(7, blueGlass);
         gui.setItem(8, blueGlass);
 
-        gui.setItem(2, new GPotion(100000,0.5d, new int[]{155, 93, 229}).getItemStack());
-        gui.setItem(3,new GPotion(250000,0.45d, new int[]{241, 91, 181}).getItemStack());
-        gui.setItem(4,new GPotion(750000,0.4d, new int[]{254, 228, 64}).getItemStack());
-        gui.setItem(5,new GPotion(1000000,0.35d, new int[]{0, 187, 249}).getItemStack());
-        gui.setItem(6,new GPotion(2000000,0.3d, new int[]{0, 245, 212}).getItemStack());
+        gui.setItem(2, new GPotion(50000,0.6d, new int[]{155, 93, 229},85000).getItemStack());
+        gui.setItem(3,new GPotion(150000,0.5d, new int[]{241, 91, 181},275000).getItemStack());
+        gui.setItem(4,new GPotion(500000,0.35d, new int[]{254, 228, 64},1000000).getItemStack());
+        gui.setItem(5,new GPotion(1250000,0.25d, new int[]{0, 187, 249},2750000).getItemStack());
+        gui.setItem(6,new GPotion(3000000,0.15d, new int[]{0, 245, 212},6500000).getItemStack());
 
 
         p.openInventory(gui);
